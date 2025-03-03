@@ -2,7 +2,7 @@ namespace OperationOOP.Core.Interfaces;
 
 // Enbart för interface demostration
 interface IInstrument
-{
+{   
     public int Id { get; set; }
     public MostCommonType Type  { get; set; }
     public string? TypeName { get; set; }

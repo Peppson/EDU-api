@@ -1,6 +1,6 @@
 ﻿namespace OperationOOP.Api.Endpoints;
 
-public partial class GetInstrumentById : IEndpoint
+public class GetInstrumentById : IEndpoint
 {
     public static void MapEndpoint(IEndpointRouteBuilder app) => app
         .MapGet("/api/instruments/{id}", Handle)
