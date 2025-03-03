@@ -1,10 +1,10 @@
 namespace OperationOOP.Core.Enums;
 
 [JsonConverter(typeof(JsonStringEnumConverter))]
-public enum InstrumentType
+public enum MostCommonType
 {
-    Stringed,
-    Percussion,
-    Keyboard,
+    Guitar,
+    Drum,
+    Piano,
     Other
 }

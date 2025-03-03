@@ -3,7 +3,8 @@
 public partial class GetInstrumentById : IEndpoint
 {
     public static void MapEndpoint(IEndpointRouteBuilder app) => app
-        .MapGet("/api/instruments/{id}", Handle);
+        .MapGet("/api/instruments/{id}", Handle)
+        .WithSummary("Get an instrument by id");
 
     private static IResult Handle(IDatabase db, int id)
     {   

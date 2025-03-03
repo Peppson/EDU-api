@@ -3,7 +3,8 @@
 public class GetAllInstruments : IEndpoint
 {
     public static void MapEndpoint(IEndpointRouteBuilder app) => app
-        .MapGet("/api/instruments", Handle);
+        .MapGet("/api/instruments", Handle)
+        .WithSummary("Get all instruments");
 
     private static IResult Handle(IDatabase db)
     {   

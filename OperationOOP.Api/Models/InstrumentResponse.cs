@@ -8,7 +8,7 @@ public record InstrumentResponse(
     int YearMade,
     int Price,
     Condition Condition,
-    InstrumentType Type,
+    MostCommonType Type,
     int? Size,          // Drum
     string? Model,      // Guitar
     bool? IsAcoustic,   // Guitar

@@ -1,31 +1,26 @@
-﻿using Swashbuckle.AspNetCore.Annotations;
+﻿using OperationOOP.Core.Models;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace OperationOOP.Api.Endpoints;
 
 public class AddInstrument : IEndpoint
 {
     public static void MapEndpoint(IEndpointRouteBuilder app) => app
-        .MapPost("/instruments/{type}", Handle)
-        .WithMetadata(new SwaggerParameterAttribute
-        {
-            Description = "The type of instrument to add (Guitar, Drum, Piano)",
-            //Enum = new[] { "Guitar", "Drum", "Piano" }
-        });
-        //.WithSummary("Add an instrument"); // Då mina klasser heter ca samma som summary tog jag bort den
+        .MapPost("/instruments/{type}/{condition}", Handle)
+        .WithSummary("Add an instrument");
 
-    private static IResult Handle(InstrumentResponse request, IDatabase db)
-    {
-        var instrument = new Instrument();
+    private static IResult Handle(InstrumentResponse request, MostCommonType type, Condition condition, IDatabase db)
+    {           
+        var instrument = Helper.GetInstrumentType(type, request);
 
-        if (db.Instruments.Count == 0)
-            instrument.Id = 0;
-        else
-            instrument.Id = db.Instruments.Count; // Starting @ id 0
-
-
-        instrument.TypeName = request.TypeName;
+        instrument.Id = db.Instruments.Count;
+        instrument.Type = type;
+        instrument.TypeName = Helper.GetInstrumentTypeName(instrument);
         instrument.LastOwner = request.LastOwner;
-
+        instrument.Brand = request.Brand;
+        instrument.YearMade = request.YearMade;
+        instrument.Price = request.Price;
+        instrument.Condition = request.Condition;
 
         db.Instruments.Add(instrument);
 
