@@ -1,6 +1,4 @@
-﻿
-
-namespace OperationOOP.Api.Endpoints;
+﻿namespace OperationOOP.Api.Endpoints;
 
 public class AddInstrument : IEndpoint
 {
@@ -10,8 +8,6 @@ public class AddInstrument : IEndpoint
 
     private static IResult Handle(InstrumentRequest request, MostCommonType type, Condition condition, IDatabase db)
     {
-        var val = new InstrumentResponseValidator();
-        
         var instrument = Helper.GetInstrumentType(type, request);        
         instrument.Id = db.Instruments.Max(e => e.Id) + 1;
         instrument.Type = type;
@@ -22,7 +18,8 @@ public class AddInstrument : IEndpoint
         instrument.Price = request.Price;
         instrument.Condition = request.Condition;
 
-
+        // Validation
+        var val = new InstrumentResponseValidator();
         var result = val.Validate(instrument);
         if (!result.IsValid)
         {
@@ -32,7 +29,6 @@ public class AddInstrument : IEndpoint
                 Message = x.ErrorMessage
             }));
         }
-
         db.Instruments.Add(instrument);
 
         return Results.Ok($"Added with id: {instrument.Id}");

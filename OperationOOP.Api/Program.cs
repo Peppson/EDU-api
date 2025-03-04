@@ -21,18 +21,15 @@ public class Program
             });
         });
 
-        
-        // Todo add validations 
         builder.Services.AddSingleton<IDatabase, Database>(); // Mock DB
         
-
         var app = builder.Build();
         if (app.Environment.IsDevelopment())
         {
             app.UseSwagger();
             app.UseSwaggerUI(c => 
             { 
-                c.DefaultModelsExpandDepth(-1);         // Hide schemas
+                c.DefaultModelsExpandDepth(-1); // Hide schemas
             }); 
         }
 
