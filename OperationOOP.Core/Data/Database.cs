@@ -35,7 +35,7 @@ public class Database : IDatabase
                 LastOwner = "John Bonham",
                 Brand = "Ludwig",
                 YearMade = 1970,
-                Price = 1000000,
+                Price = 290000,
                 Condition = Condition.Used,
             },
             new Piano
@@ -46,7 +46,7 @@ public class Database : IDatabase
                 LastOwner = "Ludwig van Beethoven",
                 Brand = "Steinway & Sons",
                 YearMade = 1867,
-                Price = 10000000,
+                Price = 10000001,
                 Condition = Condition.Refurbished,
             },
             new Instrument
@@ -57,7 +57,7 @@ public class Database : IDatabase
                 LastOwner = "Unknown",
                 Brand = "Joseph Curtin",
                 YearMade = 2005,
-                Price = 1337,
+                Price = 15,
                 Condition = Condition.New,
             },
             new Instrument
@@ -68,7 +68,29 @@ public class Database : IDatabase
                 LastOwner = "Miles Davis",
                 Brand = "Martin Committee",
                 YearMade = 1947,
-                Price = 500000,
+                Price = 599000,
+                Condition = Condition.Used
+            },
+            new Instrument
+            {
+                Id = 5,
+                Type = MostCommonType.Other,
+                TypeName = "Saxophone",
+                LastOwner = "Charlie Parker",
+                Brand = "Selmer",
+                YearMade = 1950,
+                Price = 450000,
+                Condition = Condition.Used
+            },
+            new Instrument
+            {
+                Id = 6,
+                Type = MostCommonType.Other,
+                TypeName = "Flute",
+                LastOwner = "Jean-Pierre Rampal",
+                Brand = "Muramatsu",
+                YearMade = 1975,
+                Price = 120000,
                 Condition = Condition.Used
             }
         ];

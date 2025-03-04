@@ -1,6 +1,6 @@
 namespace OperationOOP.Api.Models;
 
-public record InstrumentResponse(
+public record InstrumentRequest(
     int Id,
     string? TypeName,
     string? LastOwner,

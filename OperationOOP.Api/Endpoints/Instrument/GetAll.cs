@@ -12,7 +12,7 @@ public class GetAllInstruments : IEndpoint
             return Results.NotFound("No instruments found");
 
         var response = db.Instruments
-            .Select(i => new InstrumentResponse(
+            .Select(i => new InstrumentRequest(
                 Id: i.Id,
                 TypeName: Helper.GetInstrumentTypeName(i),
                 LastOwner: i.LastOwner,

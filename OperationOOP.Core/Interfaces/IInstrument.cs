@@ -7,7 +7,7 @@ interface IInstrument
     public MostCommonType Type  { get; set; }
     public string? TypeName { get; set; }
     public string? LastOwner { get; set; }
-    public string Brand { get; set; }
+    public  string Brand { get; set; }
     public int YearMade { get; set; }
     public int Price { get; set; }
     public Condition Condition { get; set; }

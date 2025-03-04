@@ -6,3 +6,5 @@ global using OperationOOP.Core.Interfaces;
 global using OperationOOP.Api.Models;
 global using OperationOOP.Api.Helpers;
 global using OperationOOP.Api.Endpoints;
+global using FluentValidation;
+global using OperationOOP.Api.Validation;

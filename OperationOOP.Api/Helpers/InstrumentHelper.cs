@@ -4,10 +4,10 @@ public static class Helper
 {
     public static string GetInstrumentTypeName(Instrument instrument)
     {
-        return string.IsNullOrEmpty(instrument.TypeName) ? instrument!.GetType().Name : instrument.TypeName;
+        return string.IsNullOrEmpty(instrument.TypeName) ? instrument.GetType().Name : instrument.TypeName;
     }
 
-    public static Instrument GetInstrumentType(MostCommonType type, InstrumentResponse request)
+    public static Instrument GetInstrumentType(MostCommonType type, InstrumentRequest request)
     {
         switch (type)
         {   

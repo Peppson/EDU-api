@@ -16,7 +16,7 @@ public class GetInstrumentById : IEndpoint
         if (instrument == null)
             return Results.NotFound($"Instrument with ID {id} not found");
 
-        var response = new InstrumentResponse(
+        var response = new InstrumentRequest(
             Id: instrument.Id,
             TypeName: Helper.GetInstrumentTypeName(instrument),
             LastOwner: instrument.LastOwner,

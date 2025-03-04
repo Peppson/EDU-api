@@ -1,5 +1,4 @@
-﻿using OperationOOP.Core.Models;
-using Swashbuckle.AspNetCore.Annotations;
+﻿
 
 namespace OperationOOP.Api.Endpoints;
 
@@ -9,11 +8,12 @@ public class AddInstrument : IEndpoint
         .MapPost("/instruments/{type}/{condition}", Handle)
         .WithSummary("Add an instrument");
 
-    private static IResult Handle(InstrumentResponse request, MostCommonType type, Condition condition, IDatabase db)
-    {           
-        var instrument = Helper.GetInstrumentType(type, request);
-
-        instrument.Id = db.Instruments.Count;
+    private static IResult Handle(InstrumentRequest request, MostCommonType type, Condition condition, IDatabase db)
+    {
+        var val = new InstrumentResponseValidator();
+        
+        var instrument = Helper.GetInstrumentType(type, request);        
+        instrument.Id = db.Instruments.Max(e => e.Id) + 1;
         instrument.Type = type;
         instrument.TypeName = Helper.GetInstrumentTypeName(instrument);
         instrument.LastOwner = request.LastOwner;
@@ -22,61 +22,19 @@ public class AddInstrument : IEndpoint
         instrument.Price = request.Price;
         instrument.Condition = request.Condition;
 
+
+        var result = val.Validate(instrument);
+        if (!result.IsValid)
+        {
+            return Results.BadRequest(result.Errors.Select(x => new
+            {
+                Field = x.PropertyName,
+                Message = x.ErrorMessage
+            }));
+        }
+
         db.Instruments.Add(instrument);
 
         return Results.Ok($"Added with id: {instrument.Id}");
     }
 }
-
-
-
-
-
-
-
-
-/*
-namespace OperationOOP.Api.Endpoints;
-
-public class CreateBonsai : IEndpoint
-{
-    public static void MapEndpoint(IEndpointRouteBuilder app) => app
-        .MapPost("/bonsais", Handle)
-        .WithSummary("Bonsai trees");
-
-    public record Request(
-        string Name,
-        string Species,
-        int AgeYears,
-        DateTime LastWatered,
-        DateTime LastPruned,
-        BonsaiStyle Style,
-        CareLevel CareLevel
-    );
-    public record Response(int id);
-
-    private static Ok<Response> Handle(Request request, IDatabase db)
-    {
-        
-
-        var bonsai = new Bonsai();
-
-        bonsai.Id = db.Bonsais.Any()
-            ? db.Bonsais.Max(bonsai => bonsai.Id) + 1
-            : 1;
-        bonsai.Name = request.Name;
-        bonsai.Species = request.Species;
-        bonsai.AgeYears = request.AgeYears;
-        bonsai.LastWatered = request.LastWatered;
-        bonsai.LastPruned = request.LastPruned;
-        bonsai.Style = request.Style;
-        bonsai.CareLevel = request.CareLevel;
-
-        db.Bonsais.Add(bonsai);
-
-        return TypedResults.Ok(new Response(bonsai.Id));
-    }
-}
-
-
-*/
